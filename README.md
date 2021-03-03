@@ -21,3 +21,6 @@
             - note we don't install it globally.
             - npm i json-server
         - useEffect: used to deal with side effects or to deal with them when a page loads.
+
+    - Routing portion of the video:
+        - Note: using the location hook to check if the about component should be displayed may not be ideal but it was a quick hack I was using to just use the location hook.
