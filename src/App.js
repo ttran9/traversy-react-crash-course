@@ -1,14 +1,15 @@
 import React, { Component } from "react";
+import Header from "./components/Header";
 import "./index.css";
 
-class App extends Component {
-    render() {
-        return (
-              <div>This is some filler content!</div>  
-        )
+function App() { 
 
-    }
-
+    return (
+        <div className="container">
+            <h1>Hello From React</h1>
+            <Header/>
+        </div>  
+    )
 }
 
 export default App;
