@@ -8,7 +8,7 @@ import AddTask from "./components/AddTask";
 function App() { 
     const [showAddTask, setShowAddTask] = useState(false);
     const [tasks, setTasks] = useState([])
-    const endPoint = 'http://localhost:5000/tasks';
+    const endPoint = 'http://localhost:5000/tasks/';
 
     useEffect(() => {
         const getTasks = async () => {
@@ -27,18 +27,28 @@ function App() {
     }
 
     // Add Task
-    const addTask = (task) => {
-        const id = Math.floor(Math.random() * 10000) + 1;
-        const newTask = {
-            id,
-            ...task
-        }
-        setTasks([...tasks, newTask]);
+    const addTask = async (task) => {
+        const res = await fetch(`${endPoint}`, {
+            method: 'POST',
+            headers: {
+                'Content-type': 'application/json'
+            },
+            body: JSON.stringify(task),
+        })
+        const data = await res.json()
+        setTasks([...tasks, data]);
+        
+        // const id = Math.floor(Math.random() * 10000) + 1;
+        // const newTask = {
+        //     id,
+        //     ...task
+        // }
+        // setTasks([...tasks, newTask]);
     }
 
     // Delete Task
     const deleteTask = async (id) => {
-        await fetch(`${endPoint}/${id}`,{
+        await fetch(`${endPoint}${id}`,{
             method: 'DELETE',
         });
         setTasks(tasks.filter((task) => task.id !== id));
