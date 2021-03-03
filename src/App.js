@@ -26,6 +26,13 @@ function App() {
         return data;
     }
 
+    // Fetch Task
+    const fetchTask = async (id) => {
+        const res = await fetch(`${endPoint}${id}`);
+        const data = await res.json();
+        return data;
+    }
+
     // Add Task
     const addTask = async (task) => {
         const res = await fetch(`${endPoint}`, {
@@ -56,10 +63,26 @@ function App() {
     }
 
     // Toggle Reminder
-    const toggleReminder = (id) => {
-        setTasks(tasks.map((task) => task.id === id ? 
-                    { ...task, reminder: !task.reminder } : 
-                    task))
+    const toggleReminder = async (id) => {
+        const taskToToggle = await fetchTask(id);
+        const updatedTask = {...taskToToggle, reminder:!taskToToggle.reminder};
+
+        const res = await fetch(`${endPoint}${id}`, {
+            method: 'PUT',
+            headers: {
+                'Content-type': 'application/json'
+            },
+            body: JSON.stringify(updatedTask)
+        })
+
+        const data = await res.json();
+
+        setTasks(
+            tasks.map((task) => 
+                task.id === id ? { ...task, reminder: 
+                    data.reminder } : task
+            )
+        )
     }
 
     return (
