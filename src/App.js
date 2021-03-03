@@ -8,6 +8,7 @@ function App() {
         <div className="container">
             <h1>Hello From React</h1>
             <Header />
+            {/* <Header title = {1}/> */}
             {/* <Header title='custom title tracker'/> */}
         </div>  
     )
