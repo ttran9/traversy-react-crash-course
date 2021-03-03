@@ -4,11 +4,16 @@ import Button from './Button';
 
 const Header = ({title}) => {
 // const Header = (props) => {
+
+    const onClick = () => {
+        console.log('click');
+    }
+
     return (
         <div> 
             <header className='header'>
                 <h1>{title}</h1>
-                <Button color = 'green' text='Add'/>
+                <Button color = 'green' text='Add' onClick={onClick}/>
                 {/* <Button color = 'red' text='Hello 1!'/> */}
                 {/* <Button color = 'blue' text='Hello 3!'/> */}
                 {/* <h1>{props.title}</h1> */}
