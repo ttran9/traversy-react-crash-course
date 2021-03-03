@@ -1,4 +1,5 @@
 import React from 'react'
+import { useState }  from 'react'
 
 const tasks = [
     {
@@ -24,9 +25,9 @@ const tasks = [
 const Tasks = () => {
     return (
         <div>
-            
+        {tasks.map((task) => (<h3 key={task.id}>{task.text}</h3>))}
         </div>
     )
 }
 
-export default Tasks
+export default Tasks;
