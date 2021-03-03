@@ -27,6 +27,16 @@ function App() {
           }
     ])
     
+    // Add Task
+    const addTask = (task) => {
+        const id = Math.floor(Math.random() * 10000) + 1;
+        const newTask = {
+            id,
+            ...task
+        }
+        setTasks([...tasks, newTask]);
+    }
+
     // Delete Task
     const deleteTask = (id) => {
         setTasks(tasks.filter((task) => task.id !== id))
@@ -44,7 +54,7 @@ function App() {
         <div className="container">
             {/* <h1>Hello From React</h1> */}
             <Header />
-            <AddTask/>
+            <AddTask onAdd={addTask} />
             {/* <h2>Lets test!!!</h2> */}
             {tasks.length > 0 ? 
                 <Tasks tasks={tasks} 
