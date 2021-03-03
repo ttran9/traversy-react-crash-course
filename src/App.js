@@ -1,9 +1,12 @@
-import React, { useEffect } from "react";
+import React, { Fragment, useEffect } from "react";
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 import Header from "./components/Header";
 import Tasks from "./components/Tasks";
 import "./index.css";
 import { useState }  from 'react'
 import AddTask from "./components/AddTask";
+import Footer from "./components/Footer";
+import About from "./components/About";
 
 function App() { 
     const [showAddTask, setShowAddTask] = useState(false);
@@ -86,23 +89,34 @@ function App() {
     }
 
     return (
-        <div className="container">
-            {/* <h1>Hello From React</h1> */}
-            <Header onAdd = {() => setShowAddTask(!showAddTask)}
-                showAdd={showAddTask}
-            />
-            {showAddTask && <AddTask onAdd={addTask} />}
-            {/* <h2>Lets test!!!</h2> */}
-            {tasks.length > 0 ? 
-                <Tasks tasks={tasks} 
-                        onDelete={deleteTask} 
-                        onToggle={toggleReminder}
-                /> : 
-                'No Tasks To Show'    
-            }
-            {/* <Header title = {1}/> */}
-            {/* <Header title='custom title tracker'/> */}
-        </div>  
+        <Router>
+            <div className="container">
+                {/* <h1>Hello From React</h1> */}
+                <Header onAdd = {() => setShowAddTask(!showAddTask)}
+                    showAdd={showAddTask}
+                />
+                <Route path='/' exact render={
+                    (props) => (
+                        <Fragment>
+                             {showAddTask && <AddTask onAdd={addTask} />}
+                        {/* <h2>Lets test!!!</h2> */}
+                        {tasks.length > 0 ? 
+                            <Tasks tasks={tasks} 
+                                    onDelete={deleteTask} 
+                                    onToggle={toggleReminder}
+                            /> : 
+                            'No Tasks To Show'    
+                        } 
+                        {/* <Header title = {1}/> */}
+                        {/* <Header title='custom title tracker'/> */}
+                        </Fragment>
+                    )}>
+                </Route>
+                <Route path='/about' component={About} />                    
+                <Footer/>
+            </div>   
+        </Router>
+ 
     )
 }
 
