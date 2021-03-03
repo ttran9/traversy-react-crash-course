@@ -3,6 +3,7 @@ import Header from "./components/Header";
 import Tasks from "./components/Tasks";
 import "./index.css";
 import { useState }  from 'react'
+import AddTask from "./components/AddTask";
 
 function App() { 
     const [tasks, setTasks] = useState([
@@ -41,9 +42,10 @@ function App() {
 
     return (
         <div className="container">
-            <h1>Hello From React</h1>
+            {/* <h1>Hello From React</h1> */}
             <Header />
-            <h2>Lets test!!!</h2>
+            <AddTask/>
+            {/* <h2>Lets test!!!</h2> */}
             {tasks.length > 0 ? 
                 <Tasks tasks={tasks} 
                         onDelete={deleteTask} 
