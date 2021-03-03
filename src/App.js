@@ -37,7 +37,7 @@ function App() {
             <h1>Hello From React</h1>
             <Header />
             <h2>Lets test!!!</h2>
-            <Tasks tasks={tasks} onDelete={deleteTask} />
+            {tasks.length > 0 ? <Tasks tasks={tasks} onDelete={deleteTask} /> : 'No Tasks To Show'}
             {/* <Header title = {1}/> */}
             {/* <Header title='custom title tracker'/> */}
         </div>  
