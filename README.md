@@ -6,4 +6,7 @@
 
 # Notes
 
-    -
+    - For Production:
+        - npm run build
+            - react-scripts build
+            - creates an assets directory inside of build and this can be used to deploy the app.
