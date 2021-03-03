@@ -54,7 +54,9 @@ function App() {
     return (
         <div className="container">
             {/* <h1>Hello From React</h1> */}
-            <Header />
+            <Header onAdd = {() => setShowAddTask(!showAddTask)}
+                showAdd={showAddTask}
+            />
             {showAddTask && <AddTask onAdd={addTask} />}
             {/* <h2>Lets test!!!</h2> */}
             {tasks.length > 0 ? 
