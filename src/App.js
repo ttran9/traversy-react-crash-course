@@ -25,13 +25,19 @@ function App() {
               reminder: false,
           }
     ])
+    
+    // Delete Task
+    const deleteTask = (id) => {
+        setTasks(tasks.filter((task) => task.id !== id))
+        // console.log('delete', id)
+    }
 
     return (
         <div className="container">
             <h1>Hello From React</h1>
             <Header />
             <h2>Lets test!!!</h2>
-            <Tasks tasks={tasks} />
+            <Tasks tasks={tasks} onDelete={deleteTask} />
             {/* <Header title = {1}/> */}
             {/* <Header title='custom title tracker'/> */}
         </div>  
