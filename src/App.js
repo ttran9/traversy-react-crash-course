@@ -19,10 +19,10 @@ function App() {
             "reminder": true
           },
           {
-              id: 3,
-              text: 'Food Shopping',
-              day: 'Feb 5th at 2:30pm',
-              reminder: false,
+              "id": 3,
+              "text": 'Food Shopping',
+              "day": 'Feb 5th at 2:30pm',
+              "reminder": false,
           }
     ])
     
@@ -32,12 +32,25 @@ function App() {
         // console.log('delete', id)
     }
 
+    // Toggle Reminder
+    const toggleReminder = (id) => {
+        setTasks(tasks.map((task) => task.id === id ? 
+                    { ...task, reminder: !task.reminder } : 
+                    task))
+    }
+
     return (
         <div className="container">
             <h1>Hello From React</h1>
             <Header />
             <h2>Lets test!!!</h2>
-            {tasks.length > 0 ? <Tasks tasks={tasks} onDelete={deleteTask} /> : 'No Tasks To Show'}
+            {tasks.length > 0 ? 
+                <Tasks tasks={tasks} 
+                        onDelete={deleteTask} 
+                        onToggle={toggleReminder}
+                /> : 
+                'No Tasks To Show'    
+            }
             {/* <Header title = {1}/> */}
             {/* <Header title='custom title tracker'/> */}
         </div>  
