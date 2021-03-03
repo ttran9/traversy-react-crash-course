@@ -1,0 +1,118 @@
+- i am creating this as notes because I don't want to be using create-react-app....
+- i am following this video to create these notes... https://www.youtube.com/watch?v=GieYIzvdt2U
+- look in notes for template files that can be used as a starting point.
+
+** notes:
+	- in our frontend root directory.
+		- src is where our react and redux is going to be in.
+		- templates/frontend: handles the index.html that gets loaded (it is our SINGLE PAGE) that java will use to serve our application
+			- so we will do something like 
+				- index.html contents EXAMPLE:
+					- <div id ="root"></div>
+					- <script src="./static/frontend/main.js" OR <script src="./static/frontend/main.js"
+						- for the above we need to figure out where index.html is sitting either in /templates or /static of our classpath so inside of the /resources directory.
+		- static/frontend: this is going to be our compiled javascript that will be referenced inside of index.html
+	- inside of the src/ directory I will have the index.js file there with the contents needed (can copy paste as a starting point for future reference). ****
+	- inside of the templates/ directory I will have the index.html file there with the contents needed (can copy paste as a starting point for future reference). ****
+
+
+- Steps below (starting from my frontend base directory...) <--- root directory.
+
+1) npm init -y
+2) mkdir -p src/components
+3) mkdir -p {static,templates}/frontend
+4) touch .gitignore
+5) npm i -D webpack webpack-cli (helps build)
+6) npm i -D @babel/core babel-loader @babel/preset-env @babel/preset-react babel-plugin-transform-class-properties (babel, helps with transpiling where we take es6 javascript to js the browser can understand)
+7) npm i react react-dom prop-types
+8) touch .babelrc (do this so we can use the babel preset and babel-plugin devDependencies)
+9) touch webpack.config.js
+	- this is just to load the babel loader.
+	- for the test we're just looking for ANY .js file in our regex.
+	- also load in css and bootstrap.
+10) modify in package.json
+
+
+
+// "start": "webpack-dev-server --open --mode development",
+	- under the "scripts object.
+		- so for dev we're running webpack in the development mode and we're looking for the entry point for react which is the index.js because this will import "App" from src/components/App.js and we want to output this to static/frontend/main.js
+			- 1a. "dev": "webpack --mode development ./src/index.js --output ./static/main.js",
+			- 1b. "build": "webpack --mode production ./src/index.js --output ./static/main.js",
+11) touch src/index.js
+	- inside this file load the main App component.
+12) touch src/components/App.js
+	- creating our main app component here
+13) touch templates/frontend/index.html
+	- inside of this file we can type in "!" to get boilerplate HTML code.
+	- for the src of the main.js script I am assuming that I will have index.html sitting inside of resources/static
+	and I will place main.js inside of resources/static/js/main.js
+		- given the above bullet point I have "src='./static/js/main.js'"
+	- We are also using bootstrap so I will be using the CDN for it for simplicity...
+		- I went to https://getbootstrap.com/docs/4.3/getting-started/download/ and then I got the latest cdns for bootstrap css, popper js, and jQuery. 
+14) For my spring backend, for the spring initializer dependencies I used...
+	- spring boot dev tools, spring configuration processor, lombok, MySQL Driver, Spring Data JPA, Spring Web Starter (I am not using security at the beginning because I don't want to have to create the configuration class early on).
+15) Create a helper script to do npm run dev but before doing so make sure you clear the resources/static inside of spring boot
+	- cd ../backend/src/main/resources/
+	- rf -rf static
+	- rm *.html
+	- rm *.json
+	- rm *.css
+	- rm *.ico
+	- mkdir static
+	- mkdir static/js
+	- cd ../../../../frontend/
+	- npm run dev
+	- mv templates/frontend/index.html ../backend/src/main/resources/static
+	- mv static/frontend/main.js ../backend/src/main/resource/static/js
+16) mkdir src/components/layout
+17) touch src/components/layout/Landing.js
+18) npm i axios
+
+
+
+other modules:
+npm i -d html-webpack-plugin
+npm i express
+npm i style-loader
+npm i css-loader
+npm i @babel/polyfill
+
+
+
+other:
+refer to 
+
+
+
+        <Directory />
+                Options -Indexes +FollowSymLinks
+                AllowOverride None
+                Require all granted
+        </Directory>
+        
+        ProxyRequests Off
+        ProxyPreserveHost On
+        ProxyVia Full
+        <Proxy *>
+                Require all granted
+        </Proxy>
+
+        <Location /var/www/portfolio_project>
+                ProxyPass http://127.0.0.1:8080
+                ProxyPassReverse http://127.0.0.1:8080
+        </Location>
+
+        ErrorLog ${APACHE_LOG_DIR}/error.log
+        CustomLog ${APACHE_LOG_DIR}/access.log combined
+
+
+
+
+
+
+       ProxyPreserveHost On
+
+        ProxyPass / http://172.26.15.166:3000/
+        ProxyPassReverse / http://172.26.15.166:3000/
+

@@ -1,0 +1,12 @@
+https://pm2.keymetrics.io/docs/usage/quick-start/
+
+$ pm2 restart app_name
+$ pm2 reload app_name
+$ pm2 stop app_name
+$ pm2 delete app_name
+
+
+sudo pm2 start server.js
+sudo pm2 save
+sudo pm2 stop server.js
+sudo pm2 delete server.js
