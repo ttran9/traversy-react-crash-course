@@ -6,6 +6,7 @@ import { useState }  from 'react'
 import AddTask from "./components/AddTask";
 
 function App() { 
+    const [showAddTask, setShowAddTask] = useState(false);
     const [tasks, setTasks] = useState([
         {
             "id": 1,
@@ -54,7 +55,7 @@ function App() {
         <div className="container">
             {/* <h1>Hello From React</h1> */}
             <Header />
-            <AddTask onAdd={addTask} />
+            {showAddTask && <AddTask onAdd={addTask} />}
             {/* <h2>Lets test!!!</h2> */}
             {tasks.length > 0 ? 
                 <Tasks tasks={tasks} 
